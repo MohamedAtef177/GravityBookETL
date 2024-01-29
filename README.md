@@ -55,7 +55,7 @@ To explore and replicate the project, follow these steps:
 
 
 
-* Detailed instructions for the ETL phase can be found in the [ETL folder](/ETL).
+* Detailed instructions for the ETL phase can be found in the [BookDWH](/ETL).
 
    * Customer Dimension
    
