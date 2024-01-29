@@ -1,0 +1,1609 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/20/2024 11:18:19 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-K16RH9D"
+  DTS:CreatorName="DESKTOP-K16RH9D\zone"
+  DTS:DTSID="{E138EC44-FCA0-4FEC-BD1E-10539A38EA67}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5397.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="03_Dim_Shippnig_method"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{1874E293-ECC5-4E16-AF21-336A8D19D3F5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.gravity_books]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{297F2D88-132B-4B86-AEFB-680F3CFA4475}"
+      DTS:ObjectName="DESKTOP-K16RH9D\MSSQLSERVER03.gravity_books">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-K16RH9D\MSSQLSERVER03;Initial Catalog=gravity_books;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-03_Dim_Shippnig_method-{297F2D88-132B-4B86-AEFB-680F3CFA4475}DESKTOP-K16RH9D\MSSQLSERVER03.gravity_books;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{437638CE-251B-4226-8F81-7110059DE11A}"
+      DTS:ObjectName="DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-K16RH9D\MSSQLSERVER03;Initial Catalog=Gravity_Books_DWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-03_Dim_Shippnig_method-{437638CE-251B-4226-8F81-7110059DE11A}DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Shipping_Method"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CFAF31CE-F830-4660-9259-0D67A88CD714}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Shipping_Method"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Shipping_Method\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Shipping_Method\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Output].Columns[end_date]"
+                      dataType="dbTimeStamp"
+                      description="end_date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Output].Columns[end_date]"
+                      name="end_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP)(@[System::StartTime])</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP)(@[System::StartTime])</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Shipping_Method\Derived Column 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Shipping_Method\Derived Column 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Output].Columns[start_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Output].Columns[start_date]"
+                      name="start_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP)(@[System::StartTime])</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP)(@[System::StartTime])</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Output].Columns[is_current]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Output].Columns[is_current]"
+                      name="is_current"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">1</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Shipping_Method\Drv_source_Code_System"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Drv_source_Code_System"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Shipping_Method\Drv_source_Code_System.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\Drv_source_Code_System.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Output].Columns[Source_Code]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Output].Columns[Source_Code]"
+                      name="Source_Code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)1</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\Drv_source_Code_System.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Shipping_Method\Insert Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Shipping_Method]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Shipping_Method\Insert Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].Columns[method_id]"
+                      cachedDataType="i4"
+                      cachedName="method_id"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShippingMethodID_BK]"
+                      lineageId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_id]" />
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].Columns[method_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="method_name"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[MethodName]"
+                      lineageId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_name]" />
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].Columns[Source_Code]"
+                      cachedDataType="i4"
+                      cachedName="Source_Code"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Source_System_Code]"
+                      lineageId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[Source_Code]" />
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].Columns[start_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="start_date"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[start_date]"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Output].Columns[start_date]" />
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].Columns[is_current]"
+                      cachedDataType="i4"
+                      cachedName="is_current"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_current]"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Output].Columns[is_current]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShippingMethodID_SK]"
+                      dataType="i4"
+                      name="ShippingMethodID_SK" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShippingMethodID_BK]"
+                      dataType="i4"
+                      name="ShippingMethodID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[MethodName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="MethodName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Source_System_Code]"
+                      dataType="i4"
+                      name="Source_System_Code" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[start_date]"
+                      dataType="dbTimeStamp"
+                      name="start_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[end_date]"
+                      dataType="dbTimeStamp"
+                      name="end_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_current]"
+                      dataType="bool"
+                      name="is_current" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\Insert Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Shipping_Method\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[Dim_Shipping_Method] SET [end_date] = ?,is_current=0
+ WHERE [ShippingMethodID_BK] = ? AND [end_date] IS NULL</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Shipping_Method\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input].Columns[method_id]"
+                      cachedDataType="i4"
+                      cachedName="method_id"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_id]" />
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input].Columns[end_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="end_date"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Output].Columns[end_date]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Shipping_Method\OLE DB Command 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[Dim_Shipping_Method] SET [Source_System_Code] = ? WHERE [ShippingMethodID_BK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Shipping_Method\OLE DB Command 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[method_id]"
+                      cachedDataType="i4"
+                      cachedName="method_id"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_id]" />
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[Source_Code]"
+                      cachedDataType="i4"
+                      cachedName="Source_Code"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Output].Columns[Source_Code]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\OLE DB Command 1.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\OLE DB Command 1.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Shipping_Method\SCD_Shipping_Method"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Slowly Changing Dimension;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Updates a SQL Server Analysis Services data warehouse dimension. Update dimension records that are already present and  insert dimension records that aren't. For example, update the DimProduct table of the AdventureWorksDW OLAP database with data from the Products table in the AdventureWorks OLTP database."
+              name="SCD_Shipping_Method"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SELECT statement used to create a schema rowset."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [MethodName], [ShippingMethodID_BK], [Source_System_Code],[start_date],[end_date] FROM [dbo].[Dim_Shipping_Method]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the WHERE clause in the SELECT statement that selects the current row among rows with identical business keys."
+                  name="CurrentRowWhere">[start_date] IS NOT NULL AND [end_date] IS NULL</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether historical attribute updates are directed to the transformation output for changing attribute updates."
+                  name="UpdateChangingAttributeHistory">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when columns with fixed attributes contain changes."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the column name for the inferred member."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether inferred member updates are detected."
+                  name="EnableInferredMember">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when a lookup of an existing record fails."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies that all rows in the input are new or the transformation detects the change type."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Connections[LookupConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.Gravity_Books_DWH]"
+                  description="Defines the connection to use for lookups in the dimension table"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input]"
+                  name="Slowly Changing Dimension Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].Columns[method_id]"
+                      cachedDataType="i4"
+                      cachedName="method_id"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].ExternalColumns[ShippingMethodID_BK]"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].Columns[Source_Code]"
+                      cachedDataType="i4"
+                      cachedName="Source_Code"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].ExternalColumns[Source_System_Code]"
+                      lineageId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Output].Columns[Source_Code]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].Columns[method_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="method_name"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].ExternalColumns[MethodName]"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">3</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].ExternalColumns[MethodName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="MethodName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].ExternalColumns[ShippingMethodID_BK]"
+                      dataType="i4"
+                      name="ShippingMethodID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].ExternalColumns[Source_System_Code]"
+                      dataType="i4"
+                      name="Source_System_Code" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].ExternalColumns[start_date]"
+                      dataType="dbTimeStamp"
+                      name="start_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input].ExternalColumns[end_date]"
+                      dataType="dbTimeStamp"
+                      name="end_date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[Unchanged Output]"
+                  description="Unchanged rows"
+                  exclusionGroup="1"
+                  name="Unchanged Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[New Output]"
+                  description="New rows"
+                  exclusionGroup="1"
+                  name="New Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[Fixed Attribute Output]"
+                  description="Rows with changes in columns tagged FixedAttribute"
+                  exclusionGroup="1"
+                  name="Fixed Attribute Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[Changing Attribute Updates Output]"
+                  description="These rows contain new information for ChangingAttribute (Type 1) column changes"
+                  exclusionGroup="1"
+                  name="Changing Attribute Updates Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[Historical Attribute Inserts Output]"
+                  description="HistoricalAttribute (Type 2) changes result in these new rows"
+                  exclusionGroup="2"
+                  name="Historical Attribute Inserts Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[Inferred Member Updates Output]"
+                  description="Information to update unpopulated initial dimension row"
+                  exclusionGroup="1"
+                  name="Inferred Member Updates Output"
+                  synchronousInputId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Shipping_Method\Shippnig_method_Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Shippnig_method_Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT method_id,method_name
+from [dbo].[shipping_method]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.gravity_books]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-K16RH9D\MSSQLSERVER03.gravity_books]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].ExternalColumns[method_id]"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_id]"
+                      name="method_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].ExternalColumns[method_name]"
+                      length="100"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_name]"
+                      name="method_name"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].ExternalColumns[method_id]"
+                      dataType="i4"
+                      name="method_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].ExternalColumns[method_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="method_name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output].Columns[method_id]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output].Columns[method_id]"
+                      name="method_id" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output].Columns[method_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output].Columns[method_name]"
+                      name="method_name" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Shipping_Method\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 1].Columns[method_id]"
+                      cachedDataType="i4"
+                      cachedName="method_id"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 1].Columns[method_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="method_name"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 1].Columns[Source_Code]"
+                      cachedDataType="i4"
+                      cachedName="Source_Code"
+                      lineageId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Output].Columns[Source_Code]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[Source_Code]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 2].Columns[method_id]"
+                      cachedDataType="i4"
+                      cachedName="method_id"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 2].Columns[method_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="method_name"
+                      lineageId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 2].Columns[Source_Code]"
+                      cachedDataType="i4"
+                      cachedName="Source_Code"
+                      lineageId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Output].Columns[Source_Code]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[Source_Code]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_id]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_id]"
+                      name="method_id" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[method_name]"
+                      name="method_name" />
+                    <outputColumn
+                      refId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[Source_Code]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1].Columns[Source_Code]"
+                      name="Source_Code" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[Changing Attribute Updates Output]"
+              endId="Package\DFT_Shipping_Method\OLE DB Command 1.Inputs[OLE DB Command Input]"
+              name="Changing Attribute Updates Output"
+              startId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[Changing Attribute Updates Output]" />
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[Derived Column Output]"
+              endId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Inputs[Slowly Changing Dimension Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Shipping_Method\Drv_source_Code_System.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[Derived Column Output1]"
+              endId="Package\DFT_Shipping_Method\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Shipping_Method\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[Derived Column Output2]"
+              endId="Package\DFT_Shipping_Method\Insert Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Shipping_Method\Derived Column 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[Historical Attribute Inserts Output]"
+              endId="Package\DFT_Shipping_Method\Derived Column.Inputs[Derived Column Input]"
+              name="Historical Attribute Inserts Output"
+              startId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[Historical Attribute Inserts Output]" />
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[New Output]"
+              endId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 1]"
+              name="New Output"
+              startId="Package\DFT_Shipping_Method\SCD_Shipping_Method.Outputs[New Output]" />
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[OLE DB Command Output]"
+              endId="Package\DFT_Shipping_Method\Union All.Inputs[Union All Input 2]"
+              name="OLE DB Command Output"
+              startId="Package\DFT_Shipping_Method\OLE DB Command.Outputs[OLE DB Command Output]" />
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Shipping_Method\Drv_source_Code_System.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Shipping_Method\Shippnig_method_Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT_Shipping_Method.Paths[Union All Output 1]"
+              endId="Package\DFT_Shipping_Method\Derived Column 1.Inputs[Derived Column Input]"
+              name="Union All Output 1"
+              startId="Package\DFT_Shipping_Method\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\DFT_Shipping_Method"
+          TopLeft="354.285715039896,96.3529410920135" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_Shipping_Method">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\DFT_Shipping_Method\Insert Destination"
+          TopLeft="781.128572772717,608.111764801063" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\DFT_Shipping_Method\Derived Column 1"
+          TopLeft="783.985715635942,469.805882480296" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\DFT_Shipping_Method\OLE DB Command"
+          TopLeft="531.214286833393,349.194117702023" />
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\DFT_Shipping_Method\OLE DB Command 1"
+          TopLeft="1005.98571580624,218.535294198082" />
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\DFT_Shipping_Method\SCD_Shipping_Method"
+          TopLeft="659.928572538556,22.1117648694342" />
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\DFT_Shipping_Method\Union All"
+          TopLeft="815.18571565723,351.382353083279" />
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\DFT_Shipping_Method\Drv_source_Code_System"
+          TopLeft="357.642857626385,26.0411765416394" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\DFT_Shipping_Method\Shippnig_method_Source"
+          TopLeft="131.7,5.49999999999995" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\DFT_Shipping_Method\Derived Column"
+          TopLeft="580.357144055318,204.770588327795" />
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[OLE DB Command Output]"
+          TopLeft="696.014286833393,371.088235392651">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="119.171428823836,0"
+              Start="0,0"
+              End="111.671428823836,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="111.671428823836,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[New Output]"
+          TopLeft="796.528572538556,63.7117648694342">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="78.6571431186735,287.670588213845"
+              Start="0,0"
+              End="78.6571431186735,280.170588213845">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,94.6182244090136" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,94.6182244090136"
+                    Point2="0,98.6182244090136"
+                    Point3="4,98.6182244090136" />
+                  <mssgle:LineSegment
+                    End="74.6571431186735,98.6182244090136" />
+                  <mssgle:CubicBezierSegment
+                    Point1="74.6571431186735,98.6182244090136"
+                    Point2="78.6571431186735,98.6182244090136"
+                    Point3="78.6571431186735,102.618224409014" />
+                  <mssgle:LineSegment
+                    End="78.6571431186735,280.170588213845" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="12.2371848405867,103.618224409014,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[Historical Attribute Inserts Output]"
+          TopLeft="708.128572538556,63.7117648694342">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-51.3714284832381,141.058823458361"
+              Start="0,0"
+              End="-51.3714284832381,133.558823458361">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.3572922524395" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.3572922524395"
+                    Point2="0,48.3572922524395"
+                    Point3="-4,48.3572922524395" />
+                  <mssgle:LineSegment
+                    End="-47.3714284832381,48.3572922524395" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-47.3714284832381,48.3572922524395"
+                    Point2="-51.3714284832381,48.3572922524395"
+                    Point3="-51.3714284832381,52.3572922524395" />
+                  <mssgle:LineSegment
+                    End="-51.3714284832381,133.558823458361" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-100.742100960369,53.3572922524395,150.1127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[Derived Column Output2]"
+          TopLeft="863.75714420433,511.405882480296">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,96.705882320767"
+              Start="0,0"
+              End="0,89.205882320767">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,89.205882320767" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[Derived Column Output1]"
+          TopLeft="656.757144055318,246.370588327795">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-43.1428572219246,102.823529374228"
+              Start="0,0"
+              End="-43.1428572219246,95.3235293742282">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.4117646871141" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,47.4117646871141"
+                    Point2="0,51.4117646871141"
+                    Point3="-4,51.4117646871141" />
+                  <mssgle:LineSegment
+                    End="-39.1428572219246,51.4117646871141" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-39.1428572219246,51.4117646871141"
+                    Point2="-43.1428572219246,51.4117646871141"
+                    Point3="-43.1428572219246,55.4117646871141" />
+                  <mssgle:LineSegment
+                    End="-43.1428572219246,95.3235293742282" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[Derived Column Output]"
+          TopLeft="558.442857626385,44.8764707055368">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="101.485714912171,0"
+              Start="0,0"
+              End="93.9857149121714,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="93.9857149121714,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[Changing Attribute Updates Output]"
+          TopLeft="796.528572538556,63.7117648694342">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="296.657143267685,154.823529328648"
+              Start="0,0"
+              End="296.657143267685,147.323529328648">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.0760605522108" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,49.0760605522108"
+                    Point2="0,53.0760605522108"
+                    Point3="4,53.0760605522108" />
+                  <mssgle:LineSegment
+                    End="292.657143267685,53.0760605522108" />
+                  <mssgle:CubicBezierSegment
+                    Point1="292.657143267685,53.0760605522108"
+                    Point2="296.657143267685,53.0760605522108"
+                    Point3="296.657143267685,57.0760605522108" />
+                  <mssgle:LineSegment
+                    End="296.657143267685,147.323529328648" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="69.7946653838424,58.0760605522108,157.0678125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[Union All Output 1]"
+          TopLeft="875.18571565723,392.982353083279">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.0000000212874,76.8235293970172"
+              Start="0,0"
+              End="-10.0000000212874,69.3235293970172">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.4117646985086" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.4117646985086"
+                    Point2="0,38.4117646985086"
+                    Point3="-4,38.4117646985086" />
+                  <mssgle:LineSegment
+                    End="-6.00000002128741,38.4117646985086" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.00000002128741,38.4117646985086"
+                    Point2="-10.0000000212874,38.4117646985086"
+                    Point3="-10.0000000212874,42.4117646985086" />
+                  <mssgle:LineSegment
+                    End="-10.0000000212874,69.3235293970172" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_Shipping_Method.Paths[OLE DB Source Output]"
+          TopLeft="330.1,26.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.5428576263847,20.5411765416395"
+              Start="0,0"
+              End="20.0428576263847,20.5411765416395">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="9.77142881319236,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9.77142881319236,0"
+                    Point2="13.7714288131924,0"
+                    Point3="13.7714288131924,4" />
+                  <mssgle:LineSegment
+                    End="13.7714288131924,16.5411765416395" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.7714288131924,16.5411765416395"
+                    Point2="13.7714288131924,20.5411765416395"
+                    Point3="17.7714288131924,20.5411765416395" />
+                  <mssgle:LineSegment
+                    End="20.0428576263847,20.5411765416395" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Shipping_Method\Insert Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Shipping_Method\SCD_Shipping_Method">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionID&gt;{437638CE-251B-4226-8F81-7110059DE11A}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[Dim_Shipping_Method]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_name]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;MethodName&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Shippnig_method_Source.Outputs[OLE DB Source Output].Columns[method_id]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;ShippingMethodID_BK&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Drv_source_Code_System.Outputs[Derived Column Output].Columns[Source_Code]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Source_System_Code&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Derived Column&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Union All&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Derived Column 1&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command 1&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;true&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;true&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn&gt;start_date&lt;/StartDateColumn&gt;
+  &lt;EndDateColumn&gt;end_date&lt;/EndDateColumn&gt;
+  &lt;DateVariable&gt;System::StartTime&lt;/DateVariable&gt;
+  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Shipping_Method\Shippnig_method_Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
